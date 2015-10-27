@@ -57,7 +57,8 @@ shift_register_C=(${shift_register_C_after_clocks[@]})
 IV=11001001111100101100100111001101000001000110011101001110110111101010010000000000
 #Key (80 bits)
 Key=01101110011010010110101101100011011000010111001001110101011100110111001101101111
-
+#Number of key_stream (zi) to generate (should be passed as an argument)
+n=8
 
 # Convert both IV and Key in arrays
 convert_binary_into_array $IV
@@ -75,11 +76,11 @@ echo "Key array is" ${key_array[@]}
 
 key_and_iv_setup () {
 
-# Shift Register A (S1...S93) = IV_array + fill_with_0 from S80 up to S93
-shift_register_A=(${IV_array[@]} 0 0 0 0 0 0 0 0 0 0 0 0 0)
+# Shift Register A (S1...S93) = key_array + fill_with_0 from S80 up to S93
+shift_register_A=(${key_array[@]} 0 0 0 0 0 0 0 0 0 0 0 0 0)
 
-# Shift Register B (S94...S177) = key_array + fill_with_0 from S174 to S177
-shift_register_B=(${key_array[@]} 0 0 0 0)
+# Shift Register B (S94...S177) = IV_array + fill_with_0 from S174 to S177
+shift_register_B=(${IV_array[@]} 0 0 0 0)
 
 # Shift Register C (S178...S288) = key_array + fill_with_0 from S174 to S177
 for ((i=0;i < 108; i++))
@@ -96,7 +97,7 @@ shift_register_A_original=(${shift_register_A[@]})
 shift_register_B_original=(${shift_register_B[@]})
 shift_register_C_original=(${shift_register_C[@]})
 
-for (( i = 0; i < (4 * 1); i++ ));
+for (( i = 0; i < (4 * 288); i++ ));
 
 do
 	#bitwise XOR has lower precedence than AND.
@@ -123,7 +124,7 @@ done
 #############
 key_stream_generation () {
 
-	for (( i = 0; i < 8c; i++ ));
+	for (( i = 0; i < $n; i++ ));
 	 do
 	 	s=(${shift_register_A[@]} ${shift_register_B[@]} ${shift_register_C[@]})
 		t1=$(echo $((${s[65]} ^ ${s[92]} )))
