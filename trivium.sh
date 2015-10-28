@@ -106,13 +106,13 @@ do
 	t2=$(echo $((${s[161]} ^ ${s[174]} & ${s[175]} ^ ${s[176]} ^ ${s[263]} )))
 	t3=$(echo $((${s[242]} ^ ${s[285]} & ${s[286]} ^ ${s[287]} ^ ${s[68]} )))
 	trivium_heart
- 	echo ${shift_register_A_after_clocks[@]}
-	echo ${shift_register_B_after_clocks[@]}
-	echo ${shift_register_C_after_clocks[@]}
+ 	#echo ${shift_register_A_after_clocks[@]}
+	#echo ${shift_register_B_after_clocks[@]}
+	#echo ${shift_register_C_after_clocks[@]}
 
-	echo $t1
-	echo $t2
-	echo $t3
+	#echo $t1
+	#echo $t2
+	#echo $t3
 
 done
 }
@@ -131,20 +131,22 @@ key_stream_generation () {
 		t2=$(echo $((${s[161]} ^ ${s[176]} )))
 		t3=$(echo $((${s[242]} ^ ${s[287]} )))
 		z=$(echo $(($t1 ^ $t2 ^ $t3 )))
+		output_array+=($z)
 		t1=$(echo $(($t1 ^ ${s[90]} & ${s[91]} ^ ${s[170]} )))
 		t2=$(echo $(($t2 ^ ${s[174]} & ${s[175]} ^ ${s[263]} )))
 		t3=$(echo $(($t3 ^ ${s[285]} & ${s[286]} ^ ${s[68]} )))
 
 trivium_heart
 
-echo "s:" ${s[@]}
- 	echo "t1:" $t1
- 	echo "t2:" $t2
- 	echo "t3:" $t3
- 	echo "Shift register A: " ${shift_register_A_after_clocks[@]}
-	echo "Shift register B: " ${shift_register_B_after_clocks[@]}
-	echo "Shift register C: " ${shift_register_C_after_clocks[@]}
+#echo "s:" ${s[@]}
+ 	#echo "t1:" $t1
+ 	#echo "t2:" $t2
+ 	#echo "t3:" $t3
+ 	#echo "Shift register A: " ${shift_register_A_after_clocks[@]}
+	#echo "Shift register B: " ${shift_register_B_after_clocks[@]}
+	#echo "Shift register C: " ${shift_register_C_after_clocks[@]}
 	echo "z: " $z
+	echo "output_array z:" ${output_array[@]}
 	done
 
 
