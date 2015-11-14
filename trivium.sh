@@ -63,11 +63,11 @@ n=$1
 # Convert both IV and Key in arrays
 convert_binary_into_array $IV
 IV_array=(${bits_array[@]})
-echo "IV array is" ${IV_array[@]}
+#echo "IV array is" ${IV_array[@]}
 
 convert_binary_into_array $Key
 key_array=(${bits_array[@]})
-echo "Key array is" ${key_array[@]}
+#echo "Key array is" ${key_array[@]}
 
 
 ######################################################################
@@ -145,8 +145,7 @@ trivium_heart
  	#echo "Shift register A: " ${shift_register_A_after_clocks[@]}
 	#echo "Shift register B: " ${shift_register_B_after_clocks[@]}
 	#echo "Shift register C: " ${shift_register_C_after_clocks[@]}
-	echo "z: " $z
-	echo "output_array z:" ${output_array[@]}
+	#echo "z: " $z
 	done
 
 
@@ -154,3 +153,4 @@ trivium_heart
 
 key_and_iv_setup
 key_stream_generation
+echo ${output_array[@]}
