@@ -1,14 +1,11 @@
 function trivium(n,Key)
+
 % Expresar los arrays sin comas! (es lo mismo...)
 %Key= [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-%Key_string = sscanf( sprintf( '%u', K ), '%1d' )';
-%Keys=[];
-%Key=[];
 IV=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 Comp_A = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 Comp_B = [0, 0, 0, 0];
 %n = 1000;
-%gfasgfsa
 output_array = [];
 %n = str2num(n);
 %Convierto la clave pasaada como argumento desde java en binario (primero
@@ -44,6 +41,7 @@ shifter_C_aux=shifter_C;
 
 %NOTA: El primer elemento en un array en matlab es el 1 (a diferencia de bash que es el 0)
 %
+tic;
 for i = 1:(4*288)
 s=cat(2,shifter_A_aux, shifter_B_aux, shifter_C_aux);
 t1 = bitxor((bitxor((bitxor(s(66),(bitand(s(91),s(92))))),s(93))),s(171));
@@ -84,4 +82,9 @@ end
 %disp(output_array)
 %fprintf('%g\t\n',output_array)
 fprintf('%d',output_array)
+time = toc;
+disp(time)
+%h=histogram(output_array)
+
+
 end
